@@ -13,6 +13,6 @@ module.exports = async () => {
         );
         console.log("Connected to database.");
     } catch (error) {
-        console.log("Could not connect to database.", error);
+        console.log("Could not connect to database. please run your mongodb server", error);
     }
 };

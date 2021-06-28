@@ -1,8 +1,10 @@
-const tasks = require("./routes/tasks");
-const connection = require("./database");
 const cors = require("cors");
 const express = require("express");
 const app = express();
+const connection = require("./database");
+const tasks = require("./routes/tasks");
+
+require('dotenv').config()
 
 connection();
 
