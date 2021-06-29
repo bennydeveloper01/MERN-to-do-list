@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Route , withRouter} from 'react-router-dom';
 import Tasks from "./Tasks";
 import List from "./List";
 import { Paper, TextField } from "@material-ui/core";
@@ -36,7 +37,6 @@ class EditForm extends Tasks {
         currentTask.preventDefault();
 
         const originalTasks = this.state.tasks;
-        console.log(originalTasks);
         try {
             const tasks =originalTasks;
             const index = tasks._id;
@@ -44,7 +44,8 @@ class EditForm extends Tasks {
             await editTask(tasks._id, {
                 task: this.state.currentTask,
             });
-            window.location.href= window.location.protocol + "//" + window.location.host ;
+            this.props.history.push("/");
+            // window.location.href= window.location.protocol + "//" + window.location.host ;
         } catch (error) {
             this.setState({ tasks: originalTasks });
             console.log(error);
@@ -94,4 +95,4 @@ class EditForm extends Tasks {
     }
 }
 
-export default EditForm;
+export default withRouter(EditForm);
