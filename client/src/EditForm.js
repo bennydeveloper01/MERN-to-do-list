@@ -1,13 +1,15 @@
 import React, { Component } from "react";
 import { Route , withRouter} from 'react-router-dom';
 import Tasks from "./Tasks";
-import List from "./List";
 import { Paper, TextField } from "@material-ui/core";
-import { Checkbox, Button } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import {
     getTaskId,
     editTask
 } from "./services/taskServices";
+import {
+    Link
+  } from "react-router-dom";
 
 import "./style.css";
 
@@ -30,7 +32,6 @@ class EditForm extends Tasks {
             console.log(error);
         }
     }
-
 
     handleEdit = async (currentTask) => {
 
@@ -55,8 +56,10 @@ class EditForm extends Tasks {
     render() {
         const { tasks } = this.state;
         return (
+
             <div className="App flex">
                 <Paper elevation={1} className="container">
+                <Link to={`/`}>Back to List</Link>
                     <div className="heading">Edit</div>
                     <form
                         onSubmit={this.handleEdit}
@@ -81,14 +84,6 @@ class EditForm extends Tasks {
                             Submit
                         </Button>
                     </form>
-                    {/*<div>
-                        <Button
-                            onClick={() => this.handleDelete(task._id)}
-                            color="secondary"
-                            >
-                                    delete
-                        </Button>
-                    </div>*/}
                 </Paper>
             </div>
         );
