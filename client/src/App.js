@@ -1,73 +1,36 @@
 import React from "react";
-import Tasks from "./Tasks";
-import { Paper, TextField } from "@material-ui/core";
-import { Checkbox, Button } from "@material-ui/core";
-import "./App.css";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
+import List from "./List";
+import EditForm from "./EditForm";
 
-class App extends Tasks {
-    state = { tasks: [], currentTask: "" };
-    render() {
-        const { tasks } = this.state;
-        return (
-            <div className="App flex">
-                <Paper elevation={3} className="container">
-                    <div className="heading">TO-DO</div>
-                    <form
-                        onSubmit={this.handleSubmit}
-                        className="flex"
-                        style={{ margin: "15px 0" }}
-                    >
-                        <TextField
-                            variant="outlined"
-                            size="small"
-                            style={{ width: "80%" }}
-                            value={this.state.currentTask}
-                            required={true}
-                            onChange={this.handleChange}
-                            placeholder="Add New TO-DO"
-                        />
-                        <Button
-                            style={{ height: "40px" }}
-                            color="primary"
-                            variant="outlined"
-                            type="submit"
-                        >
-                            Add task
-                        </Button>
-                    </form>
-                    <div>
-                        {tasks.map((task) => (
-                            <Paper
-                                key={task._id}
-                                className="flex task_container"
-                            >
-                                <Checkbox
-                                    checked={task.completed}
-                                    onClick={() => this.handleUpdate(task._id)}
-                                    color="primary"
-                                />
-                                <div
-                                    className={
-                                        task.completed
-                                            ? "task line_through"
-                                            : "task"
-                                    }
-                                >
-                                    {task.task}
-                                </div>
-                                <Button
-                                    onClick={() => this.handleDelete(task._id)}
-                                    color="secondary"
-                                >
-                                    delete
-                                </Button>
-                            </Paper>
-                        ))}
-                    </div>
-                </Paper>
-            </div>
-        );
-    }
+export default function App() {
+  return (
+    <Router>
+      <div>
+        {/*<nav>
+          <ul>
+            <li>
+                <Link to={`/`}>List</Link>
+            </li>
+            <li>
+              <Link to={`/edit`}>Edit</Link>
+            </li>
+          </ul>
+        </nav>*/}
+
+        <Switch>
+          <Route path="/edit/:id" >
+            <EditForm />
+          </Route>
+          <Route exact path="/">
+            <List />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
+  );
 }
-
-export default App;

@@ -20,6 +20,19 @@ router.get("/", async (req, res) => {
     }
 });
 
+router.get("/:id", async (req, res) => {
+    try {
+        const task = await Task.findOne(
+            { _id: req.params.id }
+        );
+        res.send(task);
+    } catch (error) {
+        res.send(error);
+    }
+
+});
+
+
 router.put("/:id", async (req, res) => {
     try {
         const task = await Task.findOneAndUpdate(
