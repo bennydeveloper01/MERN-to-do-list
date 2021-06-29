@@ -6,15 +6,46 @@ import "./style.css";
 import {
     Link
   } from "react-router-dom";
+import DataTable from 'react-data-table-component';
 
+  
 class List extends Tasks {
+
     state = { tasks: [], currentTask: "" };
     render() {
         const { tasks } = this.state;
+
+        const data = tasks;
+
+
+
+        const columns = [
+            {
+              name: 'Task',
+              selector: 'task',
+              sortable: true,
+            },
+            {
+                cell: (data) => <Link    to={'/edit/'+data._id}><Button>Edit</Button></Link>,
+                ignoreRowClick: true,
+                allowOverflow: true,
+                button: true,
+              },
+              {
+
+
+                cell: (data) => <Button onClick={() => this.handleDelete(data._id)}>Delete</Button>,
+                ignoreRowClick: true,
+                allowOverflow: true,
+                button: true,
+              },
+
+
+        ];
+        
         return (
-            <div className="App flex">
-                <Paper elevation={3} className="container">
-                    <div className="heading">MERN To Do List</div>
+            <div>
+                <center><h2>Mern To do List</h2></center>
                     <form
                         onSubmit={this.handleSubmit}
                         className="flex"
@@ -38,44 +69,13 @@ class List extends Tasks {
                             Submit
                         </Button>
                     </form>
-                    <div>
-                        {tasks.map((task) => (
-                            <Paper
-                                key={task._id}
-                                className="flex task_container"
-                            >
-                                <Checkbox
-                                    checked={task.completed}
-                                    onClick={() => this.handleUpdate(task._id)}
-                                    color="primary"
-                                />
-                                <div
-                                    className={
-                                        task.completed
-                                            ? "task line_through"
-                                            : "task"
-                                    }
-                                >
-                                    {task.task}
-                                </div>
 
-                                <Link to={'/edit/'+task._id}>
-                                    <Button>
-                                    Edit
-                                    </Button>
-                                </Link>
-                                <Button
-                                    onClick={() => this.handleDelete(task._id)}
-                                    color="secondary"
-                                >
-                                    delete
-                                </Button>
-
-                            </Paper>
-                        ))}
-                    </div>
-                </Paper>
-            </div>
+                <DataTable
+                    title=""
+                    columns={columns}
+                    data={data}
+                />                                           
+            </div> 
         );
     }
 }
