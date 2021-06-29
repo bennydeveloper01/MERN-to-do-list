@@ -2,7 +2,6 @@ import React from "react";
 import Tasks from "./Tasks";
 import { Paper, TextField } from "@material-ui/core";
 import { Checkbox, Button } from "@material-ui/core";
-//import history from './history';
 import "./style.css";
 import {
     Link
@@ -12,11 +11,10 @@ class List extends Tasks {
     state = { tasks: [], currentTask: "" };
     render() {
         const { tasks } = this.state;
-
         return (
             <div className="App flex">
                 <Paper elevation={3} className="container">
-                    <div className="heading">To Do List</div>
+                    <div className="heading">MERN To Do List</div>
                     <form
                         onSubmit={this.handleSubmit}
                         className="flex"
@@ -61,7 +59,11 @@ class List extends Tasks {
                                     {task.task}
                                 </div>
 
-                                <Link to={'/edit/'+task._id}>Edit</Link>
+                                <Link to={'/edit/'+task._id}>
+                                    <Button>
+                                    Edit
+                                    </Button>
+                                </Link>
                                 <Button
                                     onClick={() => this.handleDelete(task._id)}
                                     color="secondary"

@@ -2,11 +2,9 @@ import { Component } from "react";
 import {
     addTask,
     getTasks,
-    editTask,
     updateTask,
     deleteTask,
 } from "./services/taskServices";
-import { withRouter } from 'react-router';
 
 class Tasks extends Component {
     state = { tasks: [], currentTask: "" };
@@ -54,32 +52,6 @@ class Tasks extends Component {
             console.log(error);
         }
     };
-
-
-    /*handleEdit = async (currentTask) => {
-        event.preventDefault()
-
-        const originalTasks = this.state.tasks;
-        try {
-            const tasks = [...originalTasks];
-            const index = tasks.findIndex((task) => task._id === currentTask);
-            tasks[index] = { ...tasks[index] };
-            tasks[index].task = !tasks[index].task;
-            this.setState({ tasks });
-            await editTask(currentTask, {
-                task: tasks[index].task,
-            });
-            console.log(currentTask);
-            console.log(tasks);
-
-            //this.props.history.push('/')
-        } catch (error) {
-            this.setState({ tasks: originalTasks });
-            console.log(error);
-        }
-    };*/
-
-
 
     handleDelete = async (currentTask) => {
         const originalTasks = this.state.tasks;

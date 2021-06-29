@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import Tasks from "./Tasks";
-import List from "./List";
 import { Paper, TextField } from "@material-ui/core";
-import { Checkbox, Button } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import {
     getTaskId,
     editTask
 } from "./services/taskServices";
+import {
+    Link
+  } from "react-router-dom";
 
 import "./style.css";
 
@@ -30,13 +32,11 @@ class EditForm extends Tasks {
         }
     }
 
-
     handleEdit = async (currentTask) => {
 
         currentTask.preventDefault();
 
         const originalTasks = this.state.tasks;
-        console.log(originalTasks);
         try {
             const tasks =originalTasks;
             const index = tasks._id;
@@ -54,8 +54,10 @@ class EditForm extends Tasks {
     render() {
         const { tasks } = this.state;
         return (
+
             <div className="App flex">
                 <Paper elevation={1} className="container">
+                <Link to={`/`}>Back to List</Link>
                     <div className="heading">Edit</div>
                     <form
                         onSubmit={this.handleEdit}
@@ -80,14 +82,6 @@ class EditForm extends Tasks {
                             Submit
                         </Button>
                     </form>
-                    {/*<div>
-                        <Button
-                            onClick={() => this.handleDelete(task._id)}
-                            color="secondary"
-                            >
-                                    delete
-                        </Button>
-                    </div>*/}
                 </Paper>
             </div>
         );
